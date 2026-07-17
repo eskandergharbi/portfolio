@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eskander Gharbi — Développeur Fullstack Java &amp; Angular</title>
+<meta name="description" content="Eskander Gharbi, développeur Fullstack Java / Spring Boot / Angular. Études de cas : e-commerce, assurance, banque, outils internes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   TOKENS
+   ============================================ */
+:root {
+  --paper: #FAFAF7;
+  --ink: #16181C;
+  --ink-soft: #4B4F57;
+  --line: #E4E2DC;
+  --card: #FFFFFF;
+
+  --blue: #2F5EFF;
+  --blue-soft: #EEF1FF;
+  --coral: #E65F41;
+  --coral-soft: #FCEEE9;
+  --green: #1F9D6E;
+  --green-soft: #E9F7F0;
+  --purple: #7C5CFC;
+  --purple-soft: #F1EDFE;
+
+  --ok: #1F9D6E;
+  --warn: #D98A1E;
+  --off: #9AA0A8;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --wrap: 1120px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(250, 250, 247, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.brand { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; }
+.main-nav { display: flex; gap: 30px; font-size: 0.94rem; color: var(--ink-soft); }
+.main-nav a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.88rem; font-weight: 500;
+  background: var(--ink); color: var(--paper);
+  padding: 9px 18px; border-radius: 100px;
+  transition: opacity 0.15s ease;
+}
+.nav-cta:hover { opacity: 0.82; }
+@media (max-width: 720px) { .main-nav { display: none; } }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero { padding: 96px 28px 72px; max-width: 880px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 22px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.4vw, 3.1rem);
+  line-height: 1.18;
+  margin: 0 0 24px;
+  max-width: 880px;
+  letter-spacing: -0.01em;
+}
+.hero h1 em { font-style: italic; color: var(--blue); }
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 620px; margin: 0 0 40px; }
+
+.hero-meta { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+.meta-item { display: flex; flex-direction: column; }
+.meta-item strong { font-family: var(--font-display); font-size: 1.5rem; }
+.meta-item span { font-size: 0.85rem; color: var(--ink-soft); }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { font-size: 0.94rem; font-weight: 500; padding: 13px 24px; border-radius: 100px; transition: transform 0.15s ease, background 0.15s ease; }
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); }
+
+/* ============================================
+   SECTIONS shared
+   ============================================ */
+.section { padding: 70px 28px; border-top: 1px solid var(--line); }
+.section-eyebrow {
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft);
+  text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px;
+}
+.section-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 14px;
+}
+.section-note { color: var(--ink-soft); max-width: 620px; margin: 0 0 48px; font-size: 0.98rem; }
+
+/* ============================================
+   CASE STUDIES
+   ============================================ */
+.case {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+}
+.case:last-child { border-bottom: none; }
+.case--reverse { direction: rtl; }
+.case--reverse > * { direction: ltr; }
+
+@media (max-width: 860px) {
+  .case, .case--reverse { grid-template-columns: 1fr; direction: ltr; }
+}
+
+.case-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 5px 11px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.case--blue .case-tag { background: var(--blue-soft); color: var(--blue); }
+.case--coral .case-tag { background: var(--coral-soft); color: var(--coral); }
+.case--green .case-tag { background: var(--green-soft); color: var(--green); }
+.case--purple .case-tag { background: var(--purple-soft); color: var(--purple); }
+
+.case-copy h3 { font-family: var(--font-display); font-size: 1.55rem; margin: 0 0 10px; line-height: 1.25; }
+.case-role { font-weight: 500; margin: 0 0 14px; font-size: 0.92rem; color: var(--ink-soft); }
+.case-copy p:not(.case-role) { color: var(--ink-soft); font-size: 0.98rem; max-width: 480px; }
+
+.case-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.case-tags span {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 100px; color: var(--ink-soft);
+}
+
+/* ---- browser frame mockup ---- */
+.browser-frame {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px -25px rgba(20, 20, 20, 0.25);
+}
+.browser-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px; background: #F1F0EB; border-bottom: 1px solid var(--line);
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #D8D5CC; }
+.browser-url {
+  margin-left: 12px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
+}
+
+.mock { font-family: var(--font-body); font-size: 0.78rem; color: var(--ink); }
+
+/* -- ops dashboard (Carrefour) -- */
+.mock-ops { display: grid; grid-template-columns: 120px 1fr; min-height: 300px; }
+.mock-sidebar { background: #F6F5F1; border-right: 1px solid var(--line); padding: 16px 12px; }
+.mock-logo { font-weight: 700; font-size: 0.78rem; margin-bottom: 16px; }
+.mock-sidebar nav { display: flex; flex-direction: column; gap: 10px; font-size: 0.72rem; color: var(--ink-soft); }
+.mock-sidebar nav .active { color: var(--blue); font-weight: 600; }
+.mock-main { padding: 18px; }
+.mock-kpis { display: flex; gap: 10px; margin-bottom: 16px; }
+.kpi { flex: 1; background: #F6F5F1; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+.kpi-label { font-size: 0.68rem; color: var(--ink-soft); }
+.kpi-value { font-family: var(--font-mono); font-weight: 500; font-size: 1rem; }
+.kpi-value.ok { color: var(--ok); }
+.mock-chart { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-bottom: 18px; }
+.mock-chart .bar { flex: 1; background: var(--blue); opacity: 0.75; border-radius: 3px 3px 0 0; height: var(--h); }
+.mock-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+.mock-table th { text-align: left; color: var(--ink-soft); font-weight: 500; padding: 6px 4px; border-bottom: 1px solid var(--line); }
+.mock-table td { padding: 7px 4px; border-bottom: 1px solid var(--line); }
+
+/* -- catalog / arborescence (Carrefour, généricisé) -- */
+.mock-catalog { display: grid; grid-template-columns: 132px 1fr; min-height: 330px; }
+.mock-sidebar--icons nav span { padding: 6px 0; border-left: 2px solid transparent; padding-left: 8px; }
+.mock-sidebar--icons nav .active { border-left-color: var(--blue); }
+.mock-searchbar {
+  font-size: 0.72rem; color: var(--ink-soft);
+  background: #F6F5F1; border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; margin-bottom: 14px;
+}
+.mock-toolbar-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.mock-h { font-weight: 600; font-size: 0.82rem; }
+.btn-chip { font-family: var(--font-mono); font-size: 0.66rem; border: 1px solid var(--line); border-radius: 100px; padding: 5px 12px; color: var(--ink-soft); }
+.btn-chip--fill { background: var(--blue); color: #fff; border-color: var(--blue); }
+.tree-list { display: flex; flex-direction: column; margin-bottom: 16px; }
+.tree-row {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px;
+  padding: 8px 4px; border-bottom: 1px solid var(--line); font-size: 0.74rem;
+}
+.tree-count { color: var(--ink-soft); font-size: 0.68rem; white-space: nowrap; }
+.status-dot { width: 9px; height: 9px; border-radius: 50%; }
+.dot-ok { background: var(--ok); }
+.dot-warn { background: var(--warn); }
+.tile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.tile { border-radius: 8px; padding: 12px; font-size: 0.72rem; font-weight: 600; color: #fff; }
+.tile-blue { background: #4C6FEA; }
+.tile-amber { background: #D9903A; }
+.tile-pink { background: #D8695A; }
+.tile-slate { background: #6B7280; }
+
+.pill { font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 8px; border-radius: 100px; }
+.pill-ok { background: var(--green-soft); color: var(--ok); }
+.pill-warn { background: #FBF1DE; color: var(--warn); }
+.pill-off { background: #EEEDEA; color: var(--off); }
+
+/* -- full sidebar layouts (shared) -- */
+.mock-claims-full, .mock-loan-full, .mock-kanban-full { display: grid; grid-template-columns: 132px 1fr; min-height: 330px; }
+.mock-claims-full .mock-main, .mock-loan-full .mock-main, .mock-kanban-full .mock-main { padding: 18px; }
+.tile-coral { background: #D8695A; } .tile-coral2 { background: #C9563F; }
+.tile-green { background: #2A9E75; } .tile-green2 { background: #1E8563; }
+.tile-purple { background: #8266EA; } .tile-purple2 { background: #6C4FD1; }
+.mock-claims-full .tile-grid, .mock-loan-full .tile-grid, .mock-kanban-full .tile-grid { margin-top: 14px; grid-template-columns: repeat(2, 1fr); }
+
+/* -- claims (PwC/Stellantis) -- */
+.mock-claims { min-height: 300px; }
+.mock-tabs { display: flex; gap: 20px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 0.74rem; color: var(--ink-soft); }
+.mock-tabs .active { color: var(--coral); font-weight: 600; }
+.mock-claims-body { display: grid; grid-template-columns: 130px 1fr; }
+.mock-claims-list { border-right: 1px solid var(--line); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.claim-row { display: flex; flex-direction: column; gap: 4px; padding: 8px; border-radius: 6px; font-size: 0.7rem; }
+.claim-row.active { background: var(--coral-soft); }
+.claim-id { font-family: var(--font-mono); font-weight: 500; }
+.mock-claim-detail { padding: 16px 18px; }
+.stepper { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.step { font-size: 0.68rem; padding: 5px 10px; border-radius: 100px; background: #EEEDEA; color: var(--ink-soft); }
+.step.done { background: var(--green-soft); color: var(--ok); }
+.step.active { background: var(--coral); color: #fff; }
+.stepper-wide .step { flex: none; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid label { display: flex; flex-direction: column; gap: 5px; font-size: 0.68rem; color: var(--ink-soft); }
+.form-grid input {
+  font-family: var(--font-body); font-size: 0.76rem; color: var(--ink);
+  background: #F6F5F1; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px;
+}
+
+/* -- loan simulator (Algebra) -- */
+.mock-loan { padding: 18px; min-height: 300px; }
+.mock-loan-body { margin-top: 18px; }
+.sim-card {
+  margin-top: 16px; background: var(--green-soft); border-radius: 10px; padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sim-card .kpi-value { color: var(--green); font-size: 1.3rem; }
+
+/* -- kanban (Value) -- */
+.mock-kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 18px; min-height: 300px; }
+.kanban-head { font-size: 0.72rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.kanban-head span { font-weight: 400; color: var(--off); }
+.kcard {
+  background: #F6F5F1; border-radius: 8px; padding: 10px; font-size: 0.72rem; margin-bottom: 8px;
+  border: 1px solid var(--line);
+}
+.kcard.active { border-color: var(--purple); background: var(--purple-soft); }
+.kcard.done { opacity: 0.6; }
+
+/* ============================================
+   TIMELINE (parcours)
+   ============================================ */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.timeline li:last-child { border-bottom: none; }
+.tl-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); }
+.tl-role { font-weight: 600; }
+.tl-org { color: var(--ink-soft); font-size: 0.92rem; text-align: right; }
+@media (max-width: 620px) {
+  .timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .tl-org { text-align: left; }
+}
+
+/* ============================================
+   STACK
+   ============================================ */
+.stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 760px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .stack-grid { grid-template-columns: 1fr; } }
+.stack-card { border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: var(--card); }
+.stack-card h4 { margin: 0 0 8px; font-family: var(--font-display); font-size: 1.02rem; }
+.stack-card p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 8px; }
+@media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-card {
+  display: flex; flex-direction: column; gap: 8px;
+  border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: var(--card);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.contact-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+.contact-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+.contact-value { font-size: 0.94rem; font-weight: 500; }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer { padding: 30px 28px 48px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+/* ============================================
+   REVEAL
+   ============================================ */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">Eskander Gharbi</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Me contacter</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <p class="eyebrow">Développeur Fullstack — Java · Spring Boot · Angular</p>
+    <h1>Je construis des applications métier qui tiennent la charge, du <em>formulaire</em> jusqu'au <em>bus d'événements</em>.</h1>
+    <p class="lede">5 ans à concevoir des back-ends Spring Boot et des interfaces Angular pour l'assurance, la banque et le retail. Actuellement en mission chez Carrefour France, en full remote depuis la Tunisie.</p>
+
+    <div class="hero-meta">
+      <div class="meta-item"><strong>5+</strong><span>ans d'expérience</span></div>
+      <div class="meta-item"><strong>4</strong><span>secteurs (retail, assurance, banque, tech)</span></div>
+      <div class="meta-item"><strong>Full remote</strong><span>depuis la Tunisie</span></div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#projets" class="btn btn-primary">Voir les projets</a>
+      <a href="mailto:gharbieskander6@gmail.com" class="btn btn-ghost">Me contacter</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projets" class="section wrap">
+    <p class="section-eyebrow">Projets</p>
+    <h2 class="section-title">Quatre systèmes, quatre métiers différents</h2>
+    <p class="section-note">Les interfaces ci-dessous sont des reconstitutions fidèles au périmètre réel des projets (les captures des applications clients sont confidentielles).</p>
+
+    <!-- PROJECT 1 : CARREFOUR -->
+    <article class="case case--blue">
+      <div class="case-visual">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="browser-url">ops.carrefour.internal/dashboard</span>
+          </div>
+          <div class="mock mock-catalog">
+            <aside class="mock-sidebar mock-sidebar--icons">
+              <div class="mock-logo">retail<b>Ops</b></div>
+              <nav>
+                <span>Dashboard</span>
+                <span class="active">Arborescence</span>
+                <span>Catalogue</span>
+                <span>Flux &amp; imports</span>
+                <span>Magasins</span>
+                <span>Synchro</span>
+                <span>Paramètres</span>
+              </nav>
+            </aside>
+            <div class="mock-main">
+              <div class="mock-searchbar">Saisir une référence, un libellé ou un identifiant de nœud…</div>
+              <div class="mock-toolbar-row">
+                <span class="mock-h">Visualiser les nœuds du catalogue</span>
+                <span class="btn-chip">Filtrer</span>
+                <span class="btn-chip btn-chip--fill">Ajouter un nœud</span>
+              </div>
+              <div class="tree-list">
+                <div class="tree-row"><span class="tree-label">01 — Frais &amp; marché</span><span class="tree-count">9 catégories</span><span class="status-dot dot-ok"></span></div>
+                <div class="tree-row"><span class="tree-label">02 — Épicerie</span><span class="tree-count">15 catégories</span><span class="status-dot dot-ok"></span></div>
+                <div class="tree-row"><span class="tree-label">03 — Promotions saisonnières</span><span class="tree-count">11 catégories</span><span class="status-dot dot-warn"></span></div>
+                <div class="tree-row"><span class="tree-label">04 — Opérations spéciales</span><span class="tree-count">6 catégories</span><span class="status-dot dot-warn"></span></div>
+                <div class="tree-row"><span class="tree-label">05 — Livraison &amp; retrait</span><span class="tree-count">8 catégories</span><span class="status-dot dot-ok"></span></div>
+              </div>
+              <div class="tile-grid">
+                <div class="tile tile-blue">Stock &amp; disponibilité</div>
+                <div class="tile tile-amber">Prix &amp; promotions</div>
+                <div class="tile tile-pink">Publication multi-canal</div>
+                <div class="tile tile-slate">Alertes &amp; supervision</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-copy">
+        <span class="case-tag">Retail · e-commerce</span>
+        <h3>Pipeline de catalogue &amp; supervision multi-services</h3>
+        <p class="case-role">Carrefour France — Développeur Backend Java Senior · Avril 2025 → présent</p>
+        <p>Back-ends d'un environnement e-commerce à fort volume : API REST et microservices Spring Boot, communication asynchrone Kafka/RabbitMQ, pipelines de transformation et d'agrégation de données avec Apache Camel. La maquette ci-contre illustre — sous une forme généricisée — le type d'écran de gestion d'arborescence produit et de supervision multi-canal (stock, prix, publication) que ces services alimentent en coulisses.</p>
+        <div class="case-tags">
+          <span>Java 17/21</span><span>Spring Boot</span><span>Kafka</span><span>RabbitMQ</span><span>Apache Camel</span><span>Kubernetes</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 : PWC / STELLANTIS -->
+    <article class="case case--coral case--reverse">
+      <div class="case-visual">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="browser-url">assurance.stellantis.fr/sinistres/48213</span>
+          </div>
+          <div class="mock mock-claims-full">
+            <aside class="mock-sidebar mock-sidebar--icons">
+              <div class="mock-logo">Assur<b>Flow</b></div>
+              <nav>
+                <span>Dashboard</span>
+                <span>Contrats</span>
+                <span class="active">Sinistres</span>
+                <span>Clients</span>
+                <span>Documents</span>
+              </nav>
+            </aside>
+            <div class="mock-main">
+              <div class="mock-claims-body">
+                <div class="mock-claims-list">
+                  <div class="claim-row active">
+                    <span class="claim-id">#48213</span>
+                    <span class="pill pill-warn">En cours</span>
+                  </div>
+                  <div class="claim-row"><span class="claim-id">#48197</span><span class="pill pill-ok">Validé</span></div>
+                  <div class="claim-row"><span class="claim-id">#48180</span><span class="pill pill-off">Clôturé</span></div>
+                </div>
+                <div class="mock-claim-detail">
+                  <div class="stepper">
+                    <span class="step done">Déclaration</span>
+                    <span class="step done">Expertise</span>
+                    <span class="step active">Validation</span>
+                    <span class="step">Indemnisation</span>
+                  </div>
+                  <div class="form-grid">
+                    <label>Assuré<input readonly value="J. Marchand"/></label>
+                    <label>Véhicule<input readonly value="Peugeot 3008 — 2022"/></label>
+                    <label>Type de sinistre<input readonly value="Collision"/></label>
+                    <label>Montant estimé<input readonly value="3 240 €"/></label>
+                  </div>
+                </div>
+              </div>
+              <div class="tile-grid">
+                <div class="tile tile-coral">Expertise véhicule</div>
+                <div class="tile tile-coral2">Historique client</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-copy">
+        <span class="case-tag">Assurance automobile</span>
+        <h3>Plateforme de gestion de contrats &amp; sinistres</h3>
+        <p class="case-role">PwC — Projet Assurance Stellantis · Mai 2023 → Avril 2025</p>
+        <p>Microservices Spring Boot exposant des API REST sécurisées (Clean Architecture, SOLID) pour la gestion du cycle de vie des contrats et des sinistres, événements Kafka pour le découplage des mises à jour, front Angular avec Reactive Forms et RxJS pour les formulaires complexes, sécurité JWT via Spring Security. Migration Java 11 → 17 → 21 en cours de projet.</p>
+        <div class="case-tags">
+          <span>Java 11/17/21</span><span>Spring Boot 3</span><span>Angular 15/17</span><span>Kafka</span><span>Kubernetes</span><span>Azure</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 : ALGEBRA SYSTEM -->
+    <article class="case case--green">
+      <div class="case-visual">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="browser-url">core-banking.algebra.tn/pret/nouveau</span>
+          </div>
+          <div class="mock mock-loan-full">
+            <aside class="mock-sidebar mock-sidebar--icons">
+              <div class="mock-logo">Core<b>Loan</b></div>
+              <nav>
+                <span>Dossiers</span>
+                <span class="active">Nouveau prêt</span>
+                <span>Documents</span>
+                <span>Décaissement</span>
+                <span>Historique</span>
+              </nav>
+            </aside>
+            <div class="mock-main">
+              <div class="stepper stepper-wide">
+                <span class="step done">Profil</span>
+                <span class="step done">Documents</span>
+                <span class="step active">Simulation</span>
+                <span class="step">Validation</span>
+              </div>
+              <div class="mock-loan-body">
+                <div class="form-grid">
+                  <label>Revenu mensuel net<input readonly value="2 800 DT"/></label>
+                  <label>Apport personnel<input readonly value="45 000 DT"/></label>
+                  <label>Durée souhaitée<input readonly value="180 mois"/></label>
+                  <label>Bien financé<input readonly value="Résidence principale"/></label>
+                </div>
+                <div class="sim-card">
+                  <span class="kpi-label">Mensualité estimée</span>
+                  <span class="kpi-value">742 DT / mois</span>
+                  <span class="pill pill-ok">Taux d'endettement OK — 31%</span>
+                </div>
+              </div>
+              <div class="tile-grid">
+                <div class="tile tile-green">Scoring automatique</div>
+                <div class="tile tile-green2">Import SOAP legacy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-copy">
+        <span class="case-tag">Core banking</span>
+        <h3>Plateforme de gestion de prêts hypothécaires</h3>
+        <p class="case-role">Algebra System — Développeur Fullstack Java / Angular · Sept. 2021 → Mai 2023</p>
+        <p>Workflow complet du dossier client, de la création du profil (assistant ou import SOAP) jusqu'au suivi du crédit. API REST et SOAP pour l'interconnexion avec les systèmes bancaires legacy, gestion documentaire avec contrôles de cohérence et traçabilité, interfaces Angular multi-étapes avec validations métier avancées. Optimisation des requêtes SQL et suivi qualité via SonarQube.</p>
+        <div class="case-tags">
+          <span>Java 11/17</span><span>Spring Boot</span><span>Angular</span><span>PostgreSQL</span><span>SOAP / REST</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 4 : VALUE -->
+    <article class="case case--purple case--reverse">
+      <div class="case-visual">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="browser-url">tasks.value.internal/board</span>
+          </div>
+          <div class="mock mock-kanban-full">
+            <aside class="mock-sidebar mock-sidebar--icons">
+              <div class="mock-logo">Task<b>Board</b></div>
+              <nav>
+                <span class="active">Tableau</span>
+                <span>Mes tâches</span>
+                <span>Équipe</span>
+                <span>Priorités</span>
+                <span>Rapports</span>
+              </nav>
+            </aside>
+            <div class="mock-main">
+              <div class="mock-kanban">
+                <div class="kanban-col">
+                  <div class="kanban-head">À faire <span>4</span></div>
+                  <div class="kcard">Migration endpoint /users</div>
+                  <div class="kcard">Revue PR #212</div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-head">En cours <span>2</span></div>
+                  <div class="kcard active">Auth par rôles</div>
+                  <div class="kcard">Logs centralisés</div>
+                </div>
+                <div class="kanban-col">
+                  <div class="kanban-head">Terminé <span>6</span></div>
+                  <div class="kcard done">Modèle MySQL v2</div>
+                  <div class="kcard done">Tests JUnit services</div>
+                </div>
+              </div>
+              <div class="tile-grid">
+                <div class="tile tile-purple">Vélocité sprint</div>
+                <div class="tile tile-purple2">Gestion des rôles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-copy">
+        <span class="case-tag">Outil interne</span>
+        <h3>Application de gestion des tâches &amp; priorités</h3>
+        <p class="case-role">Value — Développeur Backend Java · Oct. 2020 → Sept. 2021</p>
+        <p>Architecture backend Spring Boot (principes SOLID), API REST pour la création, l'affectation et le suivi des tâches, gestion des utilisateurs et des rôles. Modèle de données relationnel MySQL, authentification et autorisation via Spring Security, gestion centralisée des exceptions et journalisation structurée des erreurs.</p>
+        <div class="case-tags">
+          <span>Java 8</span><span>Spring Boot 2.3</span><span>MySQL</span><span>Spring Security</span><span>JUnit</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- PARCOURS -->
+  <section id="parcours" class="section wrap">
+    <p class="section-eyebrow">Parcours</p>
+    <h2 class="section-title">En résumé</h2>
+    <ol class="timeline">
+      <li><span class="tl-date">2025 — présent</span><span class="tl-role">Développeur Backend Java Senior</span><span class="tl-org">Carrefour France</span></li>
+      <li><span class="tl-date">2023 — 2025</span><span class="tl-role">Développeur Fullstack Java / Angular</span><span class="tl-org">PwC — Stellantis</span></li>
+      <li><span class="tl-date">2021 — 2023</span><span class="tl-role">Développeur Fullstack Java / Angular</span><span class="tl-org">Algebra System</span></li>
+      <li><span class="tl-date">2020 — 2021</span><span class="tl-role">Développeur Backend Java</span><span class="tl-org">Value</span></li>
+      <li><span class="tl-date">2018 — 2020</span><span class="tl-role">Master Recherche en Informatique</span><span class="tl-org">Faculté des Sciences de Bizerte</span></li>
+      <li><span class="tl-date">2015 — 2018</span><span class="tl-role">Licence en Informatique</span><span class="tl-org">Faculté des Sciences de Bizerte</span></li>
+    </ol>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" class="section wrap">
+    <p class="section-eyebrow">Stack</p>
+    <h2 class="section-title">Ce que j'utilise au quotidien</h2>
+    <div class="stack-grid">
+      <div class="stack-card"><h4>Backend</h4><p>Java 8→21, Spring Boot, Spring Security, REST / SOAP, Apache Camel</p></div>
+      <div class="stack-card"><h4>Frontend</h4><p>Angular 15/17/20, RxJS, Reactive Forms, TypeScript</p></div>
+      <div class="stack-card"><h4>Messaging</h4><p>Kafka, RabbitMQ, architecture événementielle</p></div>
+      <div class="stack-card"><h4>Données</h4><p>PostgreSQL, MySQL, MongoDB, Elasticsearch</p></div>
+      <div class="stack-card"><h4>DevOps</h4><p>Docker, Kubernetes, CI/CD, Azure, SonarQube</p></div>
+      <div class="stack-card"><h4>Tests</h4><p>JUnit, Mockito, revues de code, Clean Architecture</p></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section wrap contact-section">
+    <p class="section-eyebrow">Contact</p>
+    <h2 class="section-title">On construit quelque chose ensemble&nbsp;?</h2>
+    <p class="section-note">Disponible pour missions freelance ou postes en full remote, depuis la Tunisie. TJM à partir de 300$.</p>
+    <div class="contact-grid">
+      <a href="mailto:gharbieskander6@gmail.com" class="contact-card"><span class="contact-label">Email</span><span class="contact-value">gharbieskander6@gmail.com</span></a>
+      <a href="tel:+21697526522" class="contact-card"><span class="contact-label">Téléphone</span><span class="contact-value">+216 97 526 522</span></a>
+      <a href="https://github.com/eskandergharbi" target="_blank" rel="noopener" class="contact-card"><span class="contact-label">GitHub</span><span class="contact-value">eskandergharbi ↗</span></a>
+      <!-- TODO: remplacer par l'URL exacte de ton profil LinkedIn -->
+      <a href="https://www.linkedin.com/in/eskander-gharbi" target="_blank" rel="noopener" class="contact-card"><span class="contact-label">LinkedIn</span><span class="contact-value">eskander gharbi ↗</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>© <span id="year"></span> Eskander Gharbi — Développeur Fullstack Java &amp; Angular.</p>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const revealTargets = document.querySelectorAll('.case, .stack-card, .contact-grid, .timeline li');
+revealTargets.forEach(el => el.classList.add('reveal'));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealTargets.forEach(el => observer.observe(el));
+
+</script>
+</body>
+</html>
