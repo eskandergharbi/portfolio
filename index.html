@@ -27,6 +27,8 @@
   --green-soft: #E9F7F0;
   --purple: #7C5CFC;
   --purple-soft: #F1EDFE;
+  --amber: #C97A22;
+  --amber-soft: #FBF1DE;
 
   --ok: #1F9D6E;
   --warn: #D98A1E;
@@ -165,6 +167,7 @@ a { color: inherit; text-decoration: none; }
 .case--coral .case-tag { background: var(--coral-soft); color: var(--coral); }
 .case--green .case-tag { background: var(--green-soft); color: var(--green); }
 .case--purple .case-tag { background: var(--purple-soft); color: var(--purple); }
+.case--amber .case-tag { background: var(--amber-soft); color: var(--amber); }
 
 .case-copy h3 { font-family: var(--font-display); font-size: 1.55rem; margin: 0 0 10px; line-height: 1.25; }
 .case-role { font-weight: 500; margin: 0 0 14px; font-size: 0.92rem; color: var(--ink-soft); }
@@ -252,6 +255,7 @@ a { color: inherit; text-decoration: none; }
 .tile-coral { background: #D8695A; } .tile-coral2 { background: #C9563F; }
 .tile-green { background: #2A9E75; } .tile-green2 { background: #1E8563; }
 .tile-purple { background: #8266EA; } .tile-purple2 { background: #6C4FD1; }
+.tile-amber2 { background: #B36A1C; }
 .mock-claims-full .tile-grid, .mock-loan-full .tile-grid, .mock-kanban-full .tile-grid { margin-top: 14px; grid-template-columns: repeat(2, 1fr); }
 
 /* -- claims (PwC/Stellantis) -- */
@@ -295,6 +299,18 @@ a { color: inherit; text-decoration: none; }
 }
 .kcard.active { border-color: var(--purple); background: var(--purple-soft); }
 .kcard.done { opacity: 0.6; }
+
+/* -- network inventory (Nuiva) -- */
+.mock-network { padding: 16px 18px; min-height: 300px; }
+.mock-crumb { font-size: 0.66rem; color: var(--off); margin-bottom: 8px; }
+.mock-crumb b { color: var(--ink-soft); font-weight: 500; }
+.mock-net-title { font-weight: 600; font-size: 0.86rem; margin-bottom: 10px; }
+.mock-net-tabs { display: flex; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 0.7rem; color: var(--ink-soft); flex-wrap: wrap; margin-bottom: 12px; }
+.mock-net-tabs .active { color: var(--amber); font-weight: 600; }
+.mock-net-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.mock-net-count { font-size: 0.72rem; font-weight: 600; }
+.mock-net-search { font-size: 0.68rem; color: var(--off); background: #F6F5F1; border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; }
+.mock-table td.mock-row-actions { display: flex; gap: 8px; color: var(--off); font-size: 0.76rem; }
 
 /* ============================================
    TIMELINE (parcours)
@@ -667,8 +683,7 @@ a { color: inherit; text-decoration: none; }
       <a href="mailto:gharbieskander6@gmail.com" class="contact-card"><span class="contact-label">Email</span><span class="contact-value">gharbieskander6@gmail.com</span></a>
       <a href="tel:+21697526522" class="contact-card"><span class="contact-label">Téléphone</span><span class="contact-value">+216 97 526 522</span></a>
       <a href="https://github.com/eskandergharbi" target="_blank" rel="noopener" class="contact-card"><span class="contact-label">GitHub</span><span class="contact-value">eskandergharbi ↗</span></a>
-      <!-- TODO: remplacer par l'URL exacte de ton profil LinkedIn -->
-      <a href="https://www.linkedin.com/in/eskander-gharbi" target="_blank" rel="noopener" class="contact-card"><span class="contact-label">LinkedIn</span><span class="contact-value">eskander gharbi ↗</span></a>
+      <a href="https://www.linkedin.com/in/gharbi-skander-b159681b2/" target="_blank" rel="noopener" class="contact-card"><span class="contact-label">LinkedIn</span><span class="contact-value">eskander gharbi ↗</span></a>
     </div>
   </section>
 
