@@ -255,7 +255,6 @@ a { color: inherit; text-decoration: none; }
 .tile-coral { background: #D8695A; } .tile-coral2 { background: #C9563F; }
 .tile-green { background: #2A9E75; } .tile-green2 { background: #1E8563; }
 .tile-purple { background: #8266EA; } .tile-purple2 { background: #6C4FD1; }
-.tile-amber2 { background: #B36A1C; }
 .mock-claims-full .tile-grid, .mock-loan-full .tile-grid, .mock-kanban-full .tile-grid { margin-top: 14px; grid-template-columns: repeat(2, 1fr); }
 
 /* -- claims (PwC/Stellantis) -- */
@@ -301,16 +300,56 @@ a { color: inherit; text-decoration: none; }
 .kcard.done { opacity: 0.6; }
 
 /* -- network inventory (Nuiva) -- */
-.mock-network { padding: 16px 18px; min-height: 300px; }
-.mock-crumb { font-size: 0.66rem; color: var(--off); margin-bottom: 8px; }
+.mock-nuiva { min-height: 340px; }
+.mock-nuiva-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #0B57C9; color: #fff; padding: 9px 14px; font-size: 0.72rem;
+}
+.mock-nuiva-brand { font-weight: 800; letter-spacing: 0.01em; }
+.mock-nuiva-brand em { font-style: normal; color: #FF5C8A; }
+.mock-nuiva-user { font-size: 0.64rem; opacity: 0.85; }
+.mock-nuiva-body { display: grid; grid-template-columns: 92px 1fr 92px; }
+.mock-nuiva-tree {
+  background: #F6F5F1; border-right: 1px solid var(--line);
+  padding: 10px 8px; font-size: 0.6rem; color: var(--ink-soft);
+  display: flex; flex-direction: column; gap: 9px;
+}
+.mock-nuiva-tree .active { color: var(--amber); font-weight: 600; }
+.mock-nuiva-main { padding: 12px 14px; }
+.mock-crumb { font-size: 0.62rem; color: var(--off); margin-bottom: 8px; }
 .mock-crumb b { color: var(--ink-soft); font-weight: 500; }
-.mock-net-title { font-weight: 600; font-size: 0.86rem; margin-bottom: 10px; }
-.mock-net-tabs { display: flex; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 0.7rem; color: var(--ink-soft); flex-wrap: wrap; margin-bottom: 12px; }
+.mock-net-tabs { display: flex; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-size: 0.66rem; color: var(--ink-soft); flex-wrap: wrap; margin-bottom: 12px; }
 .mock-net-tabs .active { color: var(--amber); font-weight: 600; }
-.mock-net-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.mock-net-count { font-size: 0.72rem; font-weight: 600; }
-.mock-net-search { font-size: 0.68rem; color: var(--off); background: #F6F5F1; border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; }
-.mock-table td.mock-row-actions { display: flex; gap: 8px; color: var(--off); font-size: 0.76rem; }
+.mock-nuiva-map {
+  background: linear-gradient(155deg, #BFE3E0 0%, #8FC7D9 55%, #DCEFE6 100%);
+  border-left: 1px solid var(--line); position: relative;
+}
+.mock-nuiva-map::after {
+  content: "Map"; position: absolute; top: 8px; left: 8px;
+  background: #fff; border: 1px solid var(--line); border-radius: 6px;
+  font-size: 0.6rem; padding: 2px 7px; color: var(--ink-soft);
+}
+
+/* -- Nuiva: secondary screens (node list + port mapping) -- */
+.mock-visual-stack { display: flex; flex-direction: column; gap: 14px; }
+.mock-visual-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .mock-visual-row { grid-template-columns: 1fr; } }
+
+.mock-nuiva-list { padding: 10px 12px; min-height: 150px; }
+.mock-net-toolbar-mini { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
+.mock-net-toolbar-mini .mock-net-count { font-size: 0.66rem; font-weight: 600; }
+.mock-chip-row { display: flex; gap: 6px; }
+.mock-table--sm th, .mock-table--sm td { font-size: 0.62rem; padding: 5px 4px; }
+
+.mock-nuiva-ports { padding: 10px 12px; min-height: 150px; }
+.mock-nuiva-ports .mock-h { margin-bottom: 8px; }
+.port-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.port-cell { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.port-dots { display: flex; gap: 2px; }
+.port-dot { width: 9px; height: 9px; border-radius: 50%; }
+.port-dot.b { background: var(--blue); opacity: 0.8; }
+.port-dot.f { background: var(--coral); opacity: 0.8; }
+.port-label { font-size: 0.56rem; color: var(--off); font-family: var(--font-mono); }
 
 /* ============================================
    TIMELINE (parcours)
@@ -644,6 +683,115 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
     </article>
+
+    <!-- PROJECT 5 : NUIVA -->
+    <article class="case case--amber case--reverse">
+      <div class="case-visual">
+        <div class="mock-visual-stack">
+          <div class="browser-frame">
+            <div class="mock mock-nuiva">
+              <div class="mock-nuiva-topbar">
+                <span class="mock-nuiva-brand">nu<em>iva</em> · UCMDB Inventory</span>
+                <span class="mock-nuiva-user">forTest · global-admin</span>
+              </div>
+              <div class="mock-nuiva-body">
+                <aside class="mock-nuiva-tree">
+                  <span>Physical Infra.</span>
+                  <span>Radio Access</span>
+                  <span>Core Network</span>
+                  <span>Transport</span>
+                  <span>Fixed Network</span>
+                  <span class="active">Outside Plant</span>
+                  <span>Service Inv.</span>
+                  <span>History</span>
+                </aside>
+                <div class="mock-nuiva-main">
+                  <div class="mock-crumb">Inventory &gt; Outside Plant &gt; Distribution Frame &gt; <b>Fiber Distribution Frame</b></div>
+                  <div class="mock-net-tabs">
+                    <span class="active">Element</span>
+                    <span>Configuration</span>
+                    <span>Cabinet</span>
+                    <span>Magazine</span>
+                    <span>Documents</span>
+                    <span>Osp Connection</span>
+                    <span>Port</span>
+                  </div>
+                  <div class="form-grid">
+                    <label>Object ID<input readonly value="azea"/></label>
+                    <label>Name<input readonly value="zae"/></label>
+                    <label>Site ID<input readonly value="aaa"/></label>
+                    <label>NE Model<input readonly value="Fiber Distribution Frame"/></label>
+                    <label>Exchange<input readonly value="Exchange_1001"/></label>
+                    <label>Status<input readonly value="Implemented"/></label>
+                  </div>
+                </div>
+                <div class="mock-nuiva-map"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-visual-row">
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="browser-url">oco.nuiva.internal/odf/list</span>
+              </div>
+              <div class="mock mock-nuiva-list">
+                <div class="mock-net-toolbar-mini">
+                  <span class="mock-net-count">Total : 268</span>
+                  <span class="mock-chip-row">
+                    <span class="btn-chip">Export</span>
+                    <span class="btn-chip btn-chip--fill">New</span>
+                  </span>
+                </div>
+                <table class="mock-table mock-table--sm">
+                  <thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Type</th></tr></thead>
+                  <tbody>
+                    <tr><td>azea</td><td>zae</td><td>AP</td><td>Fiber Distrib.</td></tr>
+                    <tr><td>ccc</td><td>ccc</td><td>AP</td><td>Fiber Distrib.</td></tr>
+                    <tr><td>APDiana01</td><td>APDiana01</td><td>AP</td><td>AP Type1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="browser-url">oco.nuiva.internal/odf/MAB2_ODF/ports</span>
+              </div>
+              <div class="mock mock-nuiva-ports">
+                <div class="mock-h">Internal Port Mapping — MAB2_ODF</div>
+                <div class="port-grid">
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-1</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-2</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-3</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-4</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-5</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">1-6</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-1</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-2</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-3</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-4</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-5</span></div>
+                  <div class="port-cell"><div class="port-dots"><span class="port-dot b"></span><span class="port-dot f"></span></div><span class="port-label">2-6</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-copy">
+        <span class="case-tag">Télécom · Infrastructure réseau</span>
+        <h3>Outil d'inventaire réseau UCMDB (OSP, MDF/ODF, ports, cartographie)</h3>
+        <!-- TODO: confirmer les dates exactes de la mission -->
+        <p class="case-role">Nuiva — Développeur Fullstack Java (freelance) · dates à préciser</p>
+        <p>Application d'inventaire réseau multi-domaines (Physical Infrastructure, Radio Access, Core, Transport, Fixed Network, Outside Plant) pour la gestion des répartiteurs cuivre et fibre (MDF, ODF, ODP, AP, FTP) : fiches Element avec géolocalisation sur carte, gestion des cabinets et magasins, mapping interne des ports par tiroir, connexions OSP et vue matricielle synchronisée avec un référentiel UCMDB. Interface 100% Vaadin (grilles, formulaires et onglets en Java pur), backend Spring Boot exposant les API CRUD, la recherche et l'import/export en masse.</p>
+        <div class="case-tags">
+          <span>Java 17</span><span>Spring Boot 3.2</span><span>Vaadin</span><span>REST</span><span>UCMDB</span>
+        </div>
+      </div>
+    </article>
   </section>
 
   <!-- PARCOURS -->
@@ -666,7 +814,7 @@ a { color: inherit; text-decoration: none; }
     <h2 class="section-title">Ce que j'utilise au quotidien</h2>
     <div class="stack-grid">
       <div class="stack-card"><h4>Backend</h4><p>Java 8→21, Spring Boot, Spring Security, REST / SOAP, Apache Camel</p></div>
-      <div class="stack-card"><h4>Frontend</h4><p>Angular 15/17/20, RxJS, Reactive Forms, TypeScript</p></div>
+      <div class="stack-card"><h4>Frontend</h4><p>Angular 15/17/20, RxJS, Reactive Forms, TypeScript, Vaadin (Java)</p></div>
       <div class="stack-card"><h4>Messaging</h4><p>Kafka, RabbitMQ, architecture événementielle</p></div>
       <div class="stack-card"><h4>Données</h4><p>PostgreSQL, MySQL, MongoDB, Elasticsearch</p></div>
       <div class="stack-card"><h4>DevOps</h4><p>Docker, Kubernetes, CI/CD, Azure, SonarQube</p></div>
